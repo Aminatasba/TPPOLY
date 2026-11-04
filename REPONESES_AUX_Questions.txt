@@ -1,0 +1,31 @@
+
+
+Q1. 
+L'état est stocké dans une variable, currentState, qui prend une valeur de l'objet States (IDLE: 0, DRAWING: 1). Cet objet joue le rôle d'une énumération.
+
+Q2. 
+Dans chaque gestionnaire d'événement (click, mousemove), un if / else teste l'état courant : if (currentState == States.IDLE) ... else ...
+
+Q3. 
+Chaque état est un objet d'une classe (IdleState, DrawingState) qui hérite de la classe State. Chaque classe a une méthode par événement (handleMouseClick, handleMouseMove). L'état courant est l'objet stocké dans currentState.
+
+Q4. 
+Il n'y a plus de if / else sur l'état : le gestionnaire délègue l'événement à l'état courant (currentState.handleMouseClick(e)). C'est le polymorphisme qui choisit le bon comportement.
+
+Q5. 
+État : idle. Événement : MOUSECLICK. Transition : dans l'état idle, MOUSECLICK mène à l'état drawing (target: "drawing") avec l'action createLine.
+
+Q6.
+C'est la transition MOUSECLICK de l'état drawing (target: "idle"). L'action correspondante est la fonction saveLine.
+
+Q7. 
+Dans la fonction saveLine de xStateRubberBanding.js, ligne 49 :
+rubber.stroke("black");  devient  rubber.stroke("blue");
+
+Q8. 
+La machine est décrite de façon déclarative (états, événements et transitions dans un seul objet), séparée du code des actions. Elle est plus lisible, plus facile à modifier, et on peut la visualiser et la tester dans l'éditeur visuel.
+
+Q9. Matrice États × Événements :
+État \ Événement | MOUSECLICK            | MOUSEMOVE
+idle             | createLine → drawing  | (rien)
+drawing          | saveLine → idle       | setLastPoint → drawing
